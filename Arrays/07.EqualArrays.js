@@ -10,27 +10,37 @@
 function equalArrays(firstArr, secondArr,) {
 
 
-    let arr1 = 0
-    let arr2 = 0
+    let arr1 = []
+    let arr2 = []
 
     let sum = 0
     for (let i = 0; i < firstArr.length; i++) {
-        arr1 = Number(firstArr[i])
-        sum += arr1
-        for (let i = 0; i < secondArr.length; i++) {
-            arr2 = Number(secondArr[i])
-        }
+        arr1[i] = Number(firstArr[i])
+    }
+    for (let i = 0; i < secondArr.length; i++) {
+        arr2[i] = Number(secondArr[i])
+    }
 
-        if (arr1 === arr2) {
-            console.log(`Arrays are identical. Sum: ${sum}`);
-        } else if (arr1 > arr2) {
-            console.log(`Arrays are not identical. Found difference at ${arr1} index`);
-        } else {
-            console.log(`Arrays are not identical. Found difference at ${arr2} index`);
+    areEqual = true
+    for (i = 0; i < firstArr.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            console.log(`Arrays are not identical. Found difference at ${i} index`)
+            areEqual = false
+            break;
         }
     }
+    if (areEqual) {
+        for (let sumOfArray of arr1) {
+            sum += Number(sumOfArray)
+        }
+        console.log(`Arrays are identical. Sum: ${sum}`);
+        ;
+    }
+
+
 }
 
 
-equalArrays(['10', '20', '30'],
-    ['10', '20', '30'])
+
+equalArrays(['1', '2', '3', '4', '5'],
+    ['1', '2', '4', '4', '5'])
