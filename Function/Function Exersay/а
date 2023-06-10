@@ -1,0 +1,39 @@
+function passwordValidator(password) {
+    let isValid = true; // По подразбиране смятаме, че паролата е валидна
+    let validPasswordLength = password.length >= 6 && password.length <= 10; // Проверка за дължината на паролата
+    let isValidWithDigitsAndLetters = false; // По подразбиране смятаме, че паролата не съдържа едновременно цифри и букви
+    let digitsCounter = 0; // Брояч за цифрите в паролата
+
+    for (let i = 0; i < password.length; i++) {
+        let currentChar = password.charCodeAt(i);
+        let isDigit = currentChar >= 48 && currentChar <= 57; // Проверка дали текущият символ е цифра
+        let isSmallLetter = currentChar >= 97 && currentChar <= 122; // Проверка дали текущият символ е малка буква
+        let isBigLetter = currentChar >= 65 && currentChar <= 90; // Проверка дали текущият символ е главна буква
+
+        if (isDigit) {
+            digitsCounter++; // Увеличаваме брояча за цифрите
+        }
+        if (isDigit && (isSmallLetter || isBigLetter)) { // Проверка дали текущият символ е цифра и същевременно е буква (главна или малка)
+            isValidWithDigitsAndLetters = true; // Маркираме флага, че паролата е валидна с цифри и букви
+        }
+    }
+
+    if (!validPasswordLength) {
+        console.log("Паролата трябва да бъде между 6 и 10 символа");
+        isValid = false; // Задаваме isValid на false, ако дължината на паролата не е валидна
+    }
+
+    if (!isValidWithDigitsAndLetters) {
+        console.log("Паролата трябва да съдържа само букви и цифри");
+        isValid = false; // Задаваме isValid на false, ако паролата не съдържа само букви и цифри
+    }
+
+    if (digitsCounter < 2 && digitsCounter !== 0) {
+        console.log("Паролата трябва да съдържа поне 2 цифри");
+        isValid = false; // Задаваме isValid на false, ако паролата не съдържа поне 2 цифри
+    }
+
+    if (isValid) {
+        console.log("Паролата е валидна");
+    }
+}
