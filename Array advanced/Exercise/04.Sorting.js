@@ -3,17 +3,18 @@
 // Print the elements on one row, separated by a single space.
 
 function sorting(input) {
-    let sorted = input.sort((a, b) => a - b)
+    let sorted = input.sort((a, b) => b - a)
 
     let newSortedArr = []
-    let length=input.length
+    let length = input.length
     for (let i = 0; i < length / 2; i++) {
-        sorted.shift()
-        newSortedArr.unshift()
-        sorted.pop()
-        newSortedArr.push()
+        let firstNum = sorted.shift()
+        let lastNum = sorted.pop()
+        newSortedArr.push(firstNum)
+        newSortedArr.push(lastNum)
+
     }
-    console.log(newSortedArr);
+    console.log(newSortedArr.join(' '));
 }
 
 sorting([1, 21, 3, 52, 69, 63, 31,
