@@ -7,14 +7,19 @@
 // As output print how many times that number occurs in our array in the following format:
 // "Number {number} occurs {count} times."
 
-function searchForNumber(input) {
+function searchForNumber(firstElements, secondElements) {
 
-    let startingArr=input[0]
-    let elements=input[1]
-    let newArr=[]
-    let lastArr=[]
-    
-    
+    let startingArr = firstElements.splice(0, secondElements[0])
+
+    let newArr = startingArr.splice(0, secondElements[1])
+    let counter = 0
+    for (let n = 0; n < startingArr.length; n++) {
+        let element = Number(startingArr[n])
+        if (element === (Number(secondElements[2]))) {
+            counter++
+        }
+    }
+    console.log(`Number ${secondElements[2]} occurs ${counter} times.`);
 }
 
 searchForNumber([5, 2, 3, 4, 1, 6],
