@@ -4,15 +4,16 @@
 
 function storage(input) {
 
-    let result = []
+    let result = {}
 
     for (const element of input) {
-        let [product, quality] = element.split(' ')
+        let product = element.split(' ')[0]
+        let quality = Number(element.split(' ')[1])
         if (result.hasOwnProperty(product)) {
-            result[product] += Number(result[quality])
+            result[product] += Number(quality)
+        } else {
+            result[product] = Number(quality)
         }
-        result[product] = quality
-
     }
     for (const key in result) {
         console.log(`${key} -> ${result[key]}`);
