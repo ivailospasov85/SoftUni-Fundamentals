@@ -4,41 +4,37 @@
 // Note: The average grades must be fixed to the second decimal place.
 
 
+
 function shoolGrades(input) {
-
-    let result = new Map
-
-    for (let index = 0; index < input.length; index++) {
-        let element = input[index].split(' ');
-        let name = element.shift()
-
-        // let counter = 0
-        // let average = 0
-        // for (let j = 0; j < element.length; j++) {
-        //     let grades = element[j]
-
-        //     average += grades
-        //     counter++
-
-
-
-        if (result[name] === name) {
-            result[name] += element.join()
-
-        } else {
-            result[name] = element
-
-
-        }
-        // let finallAvarege = (average / counter).toFixed(2)
-
-
-
-
-
+    let students = {};
+  
+    for (let i = 0; i < input.length; i++) {
+      let [name, ...gradesArr] = input[i].split(' ');
+      let grades = gradesArr.map(Number);
+  
+      if (students.hasOwnProperty(name)) {
+        students[name] = students[name].concat(grades);
+      } else {
+        students[name] = grades;
+      }
     }
-    console.log(result);
-}
+  
+    let studentAverages = {};
+  
+    for (let student in students) {
+      let grades = students[student];
+      let sum = grades.reduce((acc, grade) => acc + grade, 0);
+      let average = sum / grades.length;
+      studentAverages[student] = average.toFixed(2);
+    }
+  
+    let sortedStudents = Object.keys(studentAverages).sort();
+  
+    for (let student of sortedStudents) {
+      console.log(`${student}: ${studentAverages[student]}`);
+    }
+  }
+
 
 shoolGrades(['Lilly 4 6 6 5',
     'Tim 5 6',
