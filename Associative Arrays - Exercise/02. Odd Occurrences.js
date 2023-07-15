@@ -14,9 +14,13 @@ function oddOccurrences(input) {
             }
         }
     }
-    let sorted = Object.keys(result).filter((word) => result[word] % 2 !== 0).sort((a, b) => a.localeCompare(b)).join(' ')
-    console.log(sorted);
-
+    let sorted = Object.entries(result).filter((word) => word[1] % 2 !== 0).sort((a, b) => b[1] - a[1])
+    for (let key of sorted) {
+        console.log(key).join(' ');
+    }
 }
+
+
+
 
 oddOccurrences('Java C# Php PHP Java PhP 3 C# 3 1 5 C#')
