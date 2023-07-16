@@ -17,9 +17,9 @@ function piccolo(input) {
             set.delete(carNumber)
         }
     }
-    let sorted=Array.from(set.keys).sort()
+    let sorted = Array.from(set).sort()
     if (set.size > 0) {
-        set.forEach(element => {
+        sorted.forEach(element => {
             console.log(element);
         });
     } else {
@@ -33,4 +33,10 @@ function piccolo(input) {
 piccolo(['IN, CA2844AA',
     'IN, CA1234TA',
     'OUT, CA2844AA',
-    'OUT, CA1234TA'])
+    'IN, CA9999TT',
+    'IN, CA2866HI',
+    'OUT, CA1234TA',
+    'IN, CA2844AA',
+    'OUT, CA2866HI',
+    'IN, CA9876HH',
+    'IN, CA2822UU'])

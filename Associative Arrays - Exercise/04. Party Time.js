@@ -12,22 +12,36 @@ function partyTime(input) {
     let vipList = []
     let regular = []
     let result = []
-    let index = 0
-    let command = input[index]
-    index++
+
+    let command = input.shift()
+
     while (command !== 'PARTY') {
-        if (Number command[0]) {
-            vipList.push(command)
-        } else {
+
+        if (isNaN(command[0])) {
             regular.push(command)
+
+        } else {
+            vipList.push(command)
         }
-
-        result.push(command)
-        command = input[index]
-        index++
+        command = input.shift()
     }
-    console.log(result);
 
+    for (const guests of input) {
+        if (vipList.includes(guests)) {
+            let vipIndex = vipList.indexOf(guests)
+            vipList.splice(vipIndex, 1)
+        } else if (regular.includes(guests)) {
+            let regIndex = regular.indexOf(guests)
+            regular.splice(regIndex, 1)
+        }
+    }
+    result = vipList.concat(regular)
+
+    console.log(result.length);
+    
+    result.forEach(element => {
+        console.log(element);
+    })
 }
 
 partyTime([

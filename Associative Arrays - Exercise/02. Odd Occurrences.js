@@ -15,9 +15,11 @@ function oddOccurrences(input) {
         }
     }
     let sorted = Object.entries(result).filter((word) => word[1] % 2 !== 0).sort((a, b) => b[1] - a[1])
+    let buff = ''
     for (let key of sorted) {
-        console.log(key).join(' ');
+        buff += `${key[0]} `
     }
+    console.log(buff);
 }
 
 
