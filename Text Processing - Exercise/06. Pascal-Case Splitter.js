@@ -3,18 +3,19 @@
 // Print them joined by comma and space.
 
 function PascalCaseSplitter(text) {
-    let splittedText = text.split('')
-    let startIndex;
-    let buff=''
-    for (let element of splittedText) {
+    let rez = []
+    let startIndex = 0
 
-        if (element.charCodeAt() > 64 && element.charCodeAt() < 91) {
-            startIndex = splittedText.indexOf(element)
-            buff+=startIndex
+    for (let i = 1; i < text.length; i++) {
+
+        if (text.charCodeAt(i) > 64 && text.charCodeAt(i) < 91) {
+            rez.push(text.substring(startIndex, i))
+            startIndex = i
         }
 
     };
-    console.log(buff);
+    rez.push(text.substring(startIndex))
+    console.log(rez.join(', '));
 }
 
 PascalCaseSplitter('SplitMeIfYouCanHaHaYouCantOrYouCan')
