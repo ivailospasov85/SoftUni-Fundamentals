@@ -21,9 +21,40 @@
 // • Allowed working time / memory: 100ms / 16MB.
 
 
-function softuniBar(input){
+function softuniBar(input) {
 
+
+    let total = 0
+    let regex = /%(?<customer>[A-Z][a-z]+)%[^|$%.]*<(?<product>\w+)>[^|$%.]*\|(?<count>\d+)\|[^|$%.0-9]*(?<price>[\d]+.?\d*)\$/g
+
+    i = 0
+    let command = input[i]
+    i++
+
+    while (command !== 'end of shift') {
+
+        let match = [...command.matchAll(regex)]
+        if (match.length > 0) {
+            for (let element of match) {
+                let price = Number(element.groups.count) * Number(element.groups.price)
+                total += price
+
+                console.log(`${element.groups.customer}: ${element.groups.product} - ${price.toFixed(2)}`);
+                command = input[i]
+                i++
+            }
+        } else {
+            command = input[i]
+            i++
+        }
+    }
+    console.log(`Total income: ${total.toFixed(2)}`);
 
 }
 
-softuniBar()
+softuniBar(['%InvalidName%<Croissant>|2|10.3$',
+    '%Peter%<Gum>1.3$',
+    '%Maria%<Cola>|1|2.4',
+    '%Valid%<Valid>valid|10|valid20$',
+    'end of shift']
+)
