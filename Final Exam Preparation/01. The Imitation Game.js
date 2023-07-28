@@ -16,7 +16,7 @@ function theImitationGame(input) {
 
 
     let result = input.shift()
-    #{item name}#{expiration date}#{calories}#   or 
+
     for (let line of input) {
         if (line === 'Decode') {
             break;
