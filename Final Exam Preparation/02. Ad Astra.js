@@ -17,9 +17,24 @@
 // "Item: {item name}, Best before: {expiration date}, Nutrition: {calories}"
 
 
-function adAstra(){
+function adAstra(text) {
+    let regex = /([|]|[#])(?<item>[A-Za-z\s]+)\1(?<expiration>[0-9]{2}\/[0-9]{2}\/[0-9]{2})\1(?<calories>[0-9]{1,5})\1/gm
+    let totalCalories = 0
+    let match = regex.exec(text)
+    let buff = ''
+    while (match) {
+        let item = match.groups['item']
+        let expiration = match.groups['expiration']
+        let calories = match.groups['calories']
+        totalCalories += Number(calories)
 
-    #{item name}#{expiration date}#{calories}#   or 
+        buff += `Item: ${item}, Best before: ${expiration}, Nutrition: ${calories}\n`;
+        match = regex.exec(text)
+    }
+    totalCalories = Math.floor(totalCalories / 2000)
+    console.log(`You have food to last you for: ${totalCalories} days!`);
+    console.log(buff);
 }
 
-adAstra#{item name}#{expiration date}#{calories}#   or ()
+adAstra(['$$#@@%^&#Fish#24/12/20#8500#|#Incorrect#19.03.20#450|$5*(@!#Ice Cream#03/10/21#9000#^#@aswe|Milk|05/09/20|2000|']
+)
