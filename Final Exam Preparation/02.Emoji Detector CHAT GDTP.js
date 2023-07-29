@@ -1,3 +1,4 @@
+
 // Your task is to write a program that extracts emojis from a text and find the threshold based on the input.
 // You have to get your cool threshold. It is obtained by multiplying all the digits found in the input.  The cool threshold could be a huge number, so be mindful.
 // An emoji is valid when:
@@ -25,58 +26,42 @@
 // There will always be at least one digit in the text!
 
 function emojiDetector(input) {
+    let text = input[0];
 
-    let text = input.toString()
+    let regex = /([*]{2})[A-Z][a-z]{2,}([*]{2})|([:]{2})[A-Z][a-z]{2,}([:]{2})/gm;
+    let regexNumber = /[0-9]/gm;
 
-    let regex = /([*]{2})[A-Z][a-z]{2,}([*]{2})|([:]{2})[A-Z][a-z]{2,}([:]{2})/gm
-    let regexNumber = /[0-9]/gm
-   
-    let totalCoolThreshold = 1
-    let total = 0
+    let coolThreshold = 1;
+    let total = 0;
 
-    let match = [...text.matchAll(regex)]
-    let number = [...text.matchAll(regexNumber)]
-
-    for (let el of number) {
-        totalCoolThreshold = totalCoolThreshold * Number(el[0])
+    // Calculate the cool threshold
+    let numbers = text.match(regexNumber);
+    if (numbers) {
+        numbers.forEach((num) => {
+            coolThreshold *= Number(num);
+        });
     }
 
-    console.log(`Cool threshold: ${totalCoolThreshold}`);
+    console.log(`Cool threshold: ${coolThreshold}`);
 
-    let count = match.length
-    console.log(`${count} emojis found in the text. The cool ones are:`)
+    // Find and print the cool emojis
+    let emojis = text.match(regex);
+    let coolEmojis = [];
 
+    emojis.forEach((emoji) => {
+        let emojiValue = 0;
 
-    for (let element of match) {
-
-        if (element[0].startsWith("::")) {
-            let word = element[0].split('::')
-            word = word.join('')
-            for (let el of word) {
-                let NumberOfIndex = el.charCodeAt()
-                total += Number(NumberOfIndex)
-            }
-        } else if (element[0].startsWith("**")) {
-            let word = element[0].split('**')
-            word = word.join('')
-            for (let el of word) {
-                let NumberOfIndex = el.charCodeAt()
-                total += Number(NumberOfIndex)
-            }
+        for (let i = 2; i < emoji.length - 2; i++) {
+            emojiValue += emoji.charCodeAt(i);
         }
 
-        if (total > totalCoolThreshold) {
-            console.log(`${element[0]}`);
-            total = 0
+        if (emojiValue > coolThreshold) {
+            coolEmojis.push(emoji);
         }
-        
+    });
 
-    }
+    console.log(`${emojis.length} emojis found in the text. The cool ones are:`);
+    console.log(coolEmojis.join("\n"));
 }
 
-
-
-
-
 emojiDetector([("In the Sofia Zoo there are 311 animals in total! ::Smiley:: This includes 3 **Tigers**, 1 ::Elephant:, 12 **Monk3ys**, a **Gorilla::, 5 ::fox:es: and 21 different types of :Snak::Es::. ::Mooning:: **Shy**")])
-
