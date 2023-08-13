@@ -1,0 +1,22 @@
+for (let i = 10; i > 3; i -= 2) {
+    console.log(i);
+}
+
+
+function print(text) {
+    console.log('I love' + text);
+
+}
+
+print('JavaScript')
+
+
+let a = 10
+let b = 20
+let c = a > b ? a : b
+    console.log(c);
+
+
+// let greet = `hello World`
+// console.log(greet.substring(3, 5));
+

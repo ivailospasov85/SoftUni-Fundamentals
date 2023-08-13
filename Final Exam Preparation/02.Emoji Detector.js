@@ -30,10 +30,10 @@ function emojiDetector(input) {
 
     let regex = /([*]{2})[A-Z][a-z]{2,}([*]{2})|([:]{2})[A-Z][a-z]{2,}([:]{2})/gm
     let regexNumber = /[0-9]/gm
-   
+    
     let totalCoolThreshold = 1
     let total = 0
-
+    
     let match = [...text.matchAll(regex)]
     let number = [...text.matchAll(regexNumber)]
 
