@@ -16,15 +16,49 @@
 // •	The indexes from the "Cut {index} {length}" command will always be valid.
 
 
-function passwordReset(input){
+function passwordReset(input) {
+    let password = input.shift();
 
+    for (let command of input) {
+        if (command === "Done") {
+            break;
+        }
 
+        let [operation, ...params] = command.split(' ');
+
+        switch (operation) {
+            case "TakeOdd":
+                password = password.split('').filter((_, index) => index % 2 !== 0).join('');
+                console.log(password);
+                break;
+            case "Cut":
+                let [index, length] = params.map(Number);
+                let substring = password.substring(index, index + length);
+                password = password.replace(substring, '');
+                console.log(password);
+                break;
+            case "Substitute":
+                let [substringToReplace, substitute] = params;
+                if (password.includes(substringToReplace)) {
+                    while (password.includes(substringToReplace)) {
+                        password = password.replace(substringToReplace, substitute);
+                    }
+                    console.log(password);
+                } else {
+                    console.log("Nothing to replace!");
+                }
+                break;
+        }
+    }
+
+    console.log(`Your password is: ${password}`);
 }
 
-passwordReset((["Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr", 
-"TakeOdd",
-"Cut 15 3",
-"Substitute :: -",
-"Substitute | ^",
-"Done"])
+
+passwordReset((["Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr",
+    "TakeOdd",
+    "Cut 15 3",
+    "Substitute :: -",
+    "Substitute | ^",
+    "Done"])
 )
